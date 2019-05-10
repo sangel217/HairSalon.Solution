@@ -98,7 +98,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Save_AssignsIdToObject_Id()
     {
-      Client testClient = new Client("Mow the lawn", 1);
+      Client testClient = new Client("sheryl", 1);
       testClient.Save();
       Client savedClient = Client.GetAll()[0];
       int result = savedClient.GetId();
