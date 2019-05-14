@@ -1,0 +1,16 @@
+@using HairSalon.Models;
+
+<h3>Here are all of the clients for this stylist:</h3>
+
+<ol>
+    @foreach (Client client in @Model["clients"])
+    {
+        <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li>
+    }
+</ol>
+<p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+<form action="/stylists/@Model["stylist"].GetId()/delete" method="post">
+  <button type="submit" name="button">Delete the stylist</button>
+</form>
+<p><a href='/stylists'>Return to stylist list.</a></p>
+<p><a href='/'>Return to Main page</a></p>

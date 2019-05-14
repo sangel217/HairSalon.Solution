@@ -20,7 +20,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void ClientConstructor_CreatesInstanceOfClient_Client()
     {
-      Client newClient = new Client("Test");
+      Client newClient = new Client("Test", 1);
       Assert.AreEqual(typeof(Client), newClient.GetType());
     }
 
@@ -28,7 +28,7 @@ namespace HairSalon.Tests
     public void GetClientName_ReturnsClientName_String()
     {
       string clientName = "sarah";
-      Client newClient = new Client(clientName);
+      Client newClient = new Client(clientName, 1);
       string result = newClient.GetClientName();
       Assert.AreEqual(clientName, result);
     }
@@ -37,7 +37,7 @@ namespace HairSalon.Tests
     public void SetClientName_SetClientName_String()
     {
       string clientName = "sarah";
-      Client newClient = new Client(clientName);
+      Client newClient = new Client(clientName, 1);
 
       string updatedClientName = "becky";
       newClient.SetClientName(updatedClientName);
@@ -50,7 +50,7 @@ namespace HairSalon.Tests
     public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
     {
         string clientName = "sarah";
-        Client newClient = new Client(clientName);
+        Client newClient = new Client(clientName, 1);
         int result = newClient.GetId();
         Assert.AreEqual(0, result);
     }
@@ -74,7 +74,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Save_SavesToDatabase_ClientList()
     {
-      Client testClient = new Client("sarah", 1);
+      Client testClient = new Client("sarah", 0);
       testClient.Save();
       List<Client> result = Client.GetAll();
       List<Client> testList = new List<Client>{testClient};
@@ -86,8 +86,8 @@ namespace HairSalon.Tests
     {
       string clientName01 = "sarah";
       string clientName02 = "becky";
-      Client newClient1 = new Client(clientName01, 1);
-      Client newClient2 = new Client(clientName02, 1);
+      Client newClient1 = new Client(clientName01, 0);
+      Client newClient2 = new Client(clientName02, 0);
       newClient1.Save();
       newClient2.Save();
       List<Client> newList = new List<Client> { newClient1, newClient2 };
@@ -109,7 +109,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Find_ReturnsCorrectClientFromDatabase_Client()
     {
-      Client testClient = new Client("sarah", 1);
+      Client testClient = new Client("sarah", 0);
       testClient.Save();
       Client foundClient = Client.Find(testClient.GetId());
       Assert.AreEqual(testClient, foundClient);
