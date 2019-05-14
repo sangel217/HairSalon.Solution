@@ -18,20 +18,18 @@
 
 ## Setup/Installation Requirements
 
-### Re-Create database/tables
-1. Start MAMP and click Start Servers.
-2. Run Application in console.
-3. In MySql run following commands to build database and tables:
-\ > CREATE DATABASE sarah_angel;
-\ > USE sarah_angel;
-\ > CREATE TABLE stylists (id serial PRIMARY KEY, stylistName VARCHAR(255));
-\ > CREATE TABLE clients (id serial PRIMARY KEY, clientName VARCHAR(255), stylist_id INT);
-
 ### Other Requirements
 1. Download .NET Core 2.2.103 Sdk install it.
 2. Clone https://github.com/sangel217/HairSalon.Solution.
 3. To run the program, navigate to the location of the HairSalon folder then execute: $ dotnet add package MySqlConnector / $ dotnet restore / $ dotnet build / $ dotnet run.
 4. Open Url localhost:5000.
+
+### Import database/tables
+1. Start MAMP and click Open WebStart page in the MAMP window.
+2. Select phpMyAdmin from the Tools dropdown.
+3. Select the Import tab.
+4. Select sarah_angel database file and click Go.
+
 
 ## Known Bugs
 - Client name doesn't appear on Views/Clients/Show.cshtml
