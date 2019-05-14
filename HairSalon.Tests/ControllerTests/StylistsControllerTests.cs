@@ -23,12 +23,20 @@ namespace HairSalon.Tests
         Assert.IsInstanceOfType(result, typeof(List<Stylist>));
     }
 
+    // [TestMethod]
+    // public void Create_ReturnsCorrectActionType_RedirectToActionResult()
+    // {
+    //   StylistsController controller = new StylistsController();
+    //   IActionResult view = controller.Create("sarah");
+    //   Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+    // }
+
     [TestMethod]
-    public void Create_ReturnsCorrectActionType_RedirectToActionResult()
+    public void Show_ReturnsCorrectView_True()
     {
       StylistsController controller = new StylistsController();
-      IActionResult view = controller.Create("sarah");
-      Assert.IsInstanceOfType(view, typeof(RedirectToActionResult));
+      ActionResult showView = controller.Show(1);
+      Assert.IsInstanceOfType(showView, typeof(ViewResult));
     }
 
   }

@@ -1,6 +1,11 @@
+@using HairSalon.Models;
+@{
+  Layout = "_Layout";
+}
+
 <h1>Client Details: </h1>
 
-<h2>@Model["client"].GetClientName()</h2>
+<h2>@Model["clients"].GetClientName()</h2>
 <h2>Stylist: @Model["stylist"].GetStylistName()</h2>
 
 <a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>

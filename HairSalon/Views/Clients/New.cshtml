@@ -1,0 +1,24 @@
+@using HairSalon.Models;
+
+@{
+  Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Like An Angel Hair Salon</title>
+  </head>
+  <body>
+    <h1>Add a new client to @Model.GetStylistName()</h1>
+
+    <form action="/stylists/@Model.GetId()/clients" method="post">
+      <input id="stylistId" name="stylistId" type="hidden" value="@Model.GetId()">
+      <label for="clientName">Client Name</label>
+      <input id="clientName" name="clientName" type="text">
+      <button type="submit">Add client</button>
+    </form>
+  </body>
+
+</html>

@@ -7,15 +7,23 @@ using HairSalon.Models;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class ClientsController
+  public class ClientsControllerTests
   {
     [TestMethod]
     public void New_ReturnsCorrectView_True()
     {
       ClientsController controller = new ClientsController();
-      ActionResult indexView = controller.Index();
-      Assert.IsInstanceOfType(indexView, typeof (ViewResult));
+      ActionResult newView = controller.New(4);
+      Assert.IsInstanceOfType(newView, typeof (ViewResult));
 
+    }
+
+    [TestMethod]
+    public void Show_ReturnsCorrectView_True()
+    {
+      ClientsController controller = new ClientsController();
+      ActionResult showView = controller.Show(1, 1);
+      Assert.IsInstanceOfType(showView, typeof(ViewResult));
     }
   }
 }
