@@ -2,18 +2,21 @@
 @{
   Layout = "_Layout";
 }
+<body>
+
 
 <h3>Here are all of the clients for this stylist:</h3>
 
 
-@foreach (Client client in @Model["clients"])
+@foreach (Client client in @Model["client"])
 {
     <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li>
 }
 
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
-<form action="/stylists/@Model["stylist"].GetId()/delete" method="post">
+@* <form action="/stylists/@Model["stylist"].GetId()/delete" method="post">
   <button type="submit" name="button">Delete the stylist</button>
-</form>
+</form> *@
 <p><a href='/stylists'>Return to stylist list.</a></p>
 <p><a href='/'>Return to Main page</a></p>
+</body>
