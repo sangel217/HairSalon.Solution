@@ -30,7 +30,7 @@
 ### Other Requirements
 1. Download .NET Core 2.2.103 Sdk install it.
 2. Clone https://github.com/sangel217/HairSalon.Solution.
-3. To run the program, navigate to the location of the HairSalon folder then execute: $ dotnet restore $dotnet build $dotnet run.
+3. To run the program, navigate to the location of the HairSalon folder then execute: $ dotnet add package MySqlConnector / $ dotnet restore / $ dotnet build / $ dotnet run.
 4. Open Url localhost:5000.
 
 ## Known Bugs
