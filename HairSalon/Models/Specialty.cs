@@ -165,7 +165,74 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
+    }
 
+    public List<Stylist> GetStylists()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT stylistId FROM stylists_specialties WHERE specialtyId = @specialtyId;";
+      MySqlParameter specialtyIdParameter = new MySqlParameter();
+      specialtyIdParameter.ParameterName = "@specialtyId";
+      specialtyIdParameter.Value = _id;
+      cmd.Parameters.Add(specialtyIdParameter);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<int> stylistIds = new List<int> {};
+      while(rdr.Read())
+      {
+        int stylistId = rdr.GetInt32(0);
+        stylistIds.Add(stylistId);
+      }
+      rdr.Dispose();
+      List<Stylist> stylists = new List<Stylist> {};
+      foreach (int stylistId in stylistIds)
+      {
+        var stylistQuery = conn.CreateCommand() as MySqlCommand;
+        stylistQuery.CommandText = @"SELECT * FROM stylists WHERE id = @StylistId;";
+        MySqlParameter stylistIdParameter = new MySqlParameter();
+        stylistIdParameter.ParameterName = "@StylistId";
+        stylistIdParameter.Value = stylistId;
+        stylistQuery.Parameters.Add(stylistIdParameter);
+        var stylistQueryRdr = stylistQuery.ExecuteReader() as MySqlDataReader;
+        while(stylistQueryRdr.Read())
+        {
+          int thisStylistId = stylistQueryRdr.GetInt32(0);
+          string stylistName = stylistQueryRdr.GetString(1);
+          Stylist foundStylist = new Stylist(stylistName, thisStylistId);
+          stylists.Add(foundStylist);
+        }
+        stylistQueryRdr.Dispose();
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return stylists;
+    }
+
+    public void AddStylist(Stylist newStylist)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      //this adds an entry to the categories_items join table containg IDs for relevant Specialty and Stylist objects
+      cmd.CommandText = @"INSERT INTO stylists_specialties (stylistId, specialtyId) VALUES (@StylistId, @SpecialtyId);";
+      MySqlParameter stylistId = new MySqlParameter();
+      stylistId.ParameterName = "@StylistId";
+      stylistId.Value = newStylist.GetId();
+      cmd.Parameters.Add(stylistId);
+      MySqlParameter specialtyId = new MySqlParameter();
+      specialtyId.ParameterName = "@SpecialtyId";
+      specialtyId.Value = _id;
+      cmd.Parameters.Add(specialtyId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
   }
 }
