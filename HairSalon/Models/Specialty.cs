@@ -25,6 +25,11 @@ namespace HairSalon.Models
       return _id;
     }
 
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
@@ -59,7 +64,7 @@ namespace HairSalon.Models
       {
           conn.Dispose();
       }
-      return allSpecialtys;
+      return allSpecialties;
     }
 
     public override bool Equals(System.Object otherSpecialty)
@@ -107,15 +112,14 @@ namespace HairSalon.Models
       searchId.Value = id;
       cmd.Parameters.Add(searchId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int specialtieId = 0;
+      int specialtyId = 0;
       string description = "";
       while(rdr.Read())
       {
-        specialtieId = rdr.GetInt32(0);
+        specialtyId = rdr.GetInt32(0);
         description = rdr.GetString(1);
-        specialtieStylistId = rdr.GetInt32(2);
       }
-      Specialty newSpecialty = new Specialty(description, specialtieStylistId, specialtieId);
+      Specialty newSpecialty = new Specialty(description, specialtyId);
       conn.Close();
       if (conn != null)
       {

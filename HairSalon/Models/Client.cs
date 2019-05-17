@@ -22,11 +22,6 @@ namespace HairSalon.Models
       return _clientName;
     }
 
-    public void SetClientName(string newClientName)
-    {
-      _clientName = newClientName;
-    }
-
     public int GetId()
     {
       return _id;
@@ -35,6 +30,11 @@ namespace HairSalon.Models
     public int GetStylistId()
     {
       return _stylistId;
+    }
+
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
     }
 
     public static void ClearAll()
