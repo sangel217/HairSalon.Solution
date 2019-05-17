@@ -25,6 +25,11 @@ namespace HairSalon.Models
       return _id;
     }
 
+    public override int GetHashCode()
+    {
+        return this.GetId().GetHashCode();
+    }
+
     public static List<Stylist> GetAll()
     {
       List<Stylist> allStylists = new List<Stylist> {};
@@ -129,9 +134,9 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylistId = @stylistId;";
       MySqlParameter stylistId = new MySqlParameter();
-      stylistId.ParameterName = "@stylist_id";
+      stylistId.ParameterName = "@stylistId";
       stylistId.Value = this._id;
       cmd.Parameters.Add(stylistId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -149,6 +154,46 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return allStylistClients;
+    }
+
+    public void Edit(string newStylist)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE stylists SET stylistName = @newStylist WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+      MySqlParameter stylistName = new MySqlParameter();
+      stylistName.ParameterName = "@newStylist";
+      stylistName.Value = newStylist;
+      cmd.Parameters.Add(stylistName);
+      cmd.ExecuteNonQuery();
+      _stylistName = newStylist;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = new MySqlCommand("DELETE FROM stylists WHERE id = @stylistId; DELETE FROM clients WHERE id = @stylistId;", conn);
+      MySqlParameter stylistIdParameter = new MySqlParameter();
+      stylistIdParameter.ParameterName = "@stylistId";
+      stylistIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
   }
 }

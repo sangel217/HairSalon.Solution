@@ -96,13 +96,13 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (clientName, stylist_id) VALUES (@clientName, @stylist_id);";
+      cmd.CommandText = @"INSERT INTO clients (clientName, stylistId) VALUES (@clientName, @stylistId);";
       MySqlParameter clientName = new MySqlParameter();
       clientName.ParameterName = "@clientName";
       clientName.Value = this._clientName;
       cmd.Parameters.Add(clientName);
       MySqlParameter stylistId = new MySqlParameter();
-      stylistId.ParameterName = "@stylist_id";
+      stylistId.ParameterName = "@stylistId";
       stylistId.Value = this._stylistId;
       cmd.Parameters.Add(stylistId);
       cmd.ExecuteNonQuery();
@@ -141,6 +141,46 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return newClient;
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = new MySqlCommand("DELETE FROM clients WHERE id = @clientNameId;", conn);
+      MySqlParameter clientNameIdParameter = new MySqlParameter();
+      clientNameIdParameter.ParameterName = "@clientNameId";
+      clientNameIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(clientNameIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public void Edit(string newClientName)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE clients SET clientName = @newClientName WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+      MySqlParameter clientName = new MySqlParameter();
+      clientName.ParameterName = "@newClientName";
+      clientName.Value = newClientName;
+      cmd.Parameters.Add(clientName);
+      cmd.ExecuteNonQuery();
+      _clientName = newClientName;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+
     }
   }
 }
