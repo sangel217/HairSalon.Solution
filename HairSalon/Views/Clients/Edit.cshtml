@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+<h1>Like An Angel Hair Salon</h1>
+<hr>
+
+<h2>Edit client: @Model["client"].GetClientName()</h2>
+
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
+  <label for="newClientName">Name:</label>
+  <input type="text" name="newClientName" value="@Model["client"].GetClientName()">
+  <button type="submit">Edit</button>
+</form>
+
+<h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous page</a></h4>

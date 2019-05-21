@@ -134,7 +134,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients WHERE stylistId = @stylistId;";
+      cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylistId;";
       MySqlParameter stylistId = new MySqlParameter();
       stylistId.ParameterName = "@stylistId";
       stylistId.Value = this._id;

@@ -12,6 +12,8 @@
 
 <a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>
 <a href='/stylists'>View all stylists</a>
-@* <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this Client</a>
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete'>Delete this Client</a> *@
+<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this Client</a>
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete" method="post">
+  <button type="submit" name="button">Delete this client</button>
+</form>
 </body>

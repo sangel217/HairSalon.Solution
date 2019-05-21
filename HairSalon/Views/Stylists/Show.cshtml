@@ -8,7 +8,7 @@
 <h3>Here are all of the clients for this stylist:</h3>
 
 
-@foreach (Client client in @Model["client"])
+@foreach (var client in @Model["client"])
 {
     <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li>
 }
