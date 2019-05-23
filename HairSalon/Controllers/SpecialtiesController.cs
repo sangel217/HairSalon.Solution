@@ -83,11 +83,11 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/specialties/{specialtyId}/stylists/new")]
-    public ActionResult AddStylist(int specialtyId, int stylistId)
+    public ActionResult AddStylists(int specialtyId, int stylistId)
     {
       Specialty specialty = Specialty.Find(specialtyId);
       Stylist stylist = Stylist.Find(stylistId);
-      specialty.AddStylist(stylist);
+      specialty.AddStylists(stylist);
       return RedirectToAction("Show",  new { id = specialtyId });
     }
   }

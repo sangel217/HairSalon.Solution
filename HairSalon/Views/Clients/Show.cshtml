@@ -5,13 +5,20 @@
 <body>
 
 
-<h1>Client Details: </h1>
+<h1>@Model["stylist"].GetStylistName() Client Details: </h1>
 
 <h2>@Model["client"].GetClientName()</h2>
 <h2>Stylist: @Model["stylist"].GetStylistName()</h2>
 
-<a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a>
-<a href='/stylists'>View all stylists</a>
-@* <a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit'>Edit this Client</a>
-<a href='/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete'>Delete this Client</a> *@
+<h3><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a></h3>
+<h3><a href='/stylists'>View all stylists</a></h3>
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete" method="post">
+  <button type="submit" name="button">Delete this client</button>
+</form>
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/edit" />
+  <button type="submit" name="button">Edit this client</button>
+</form>
+<form action="/stylists/@Model["stylist"].GetId()/clients/delete" method="post">
+  <button type="submit" name="button">Clear All Clients</button>
+</form>
 </body>

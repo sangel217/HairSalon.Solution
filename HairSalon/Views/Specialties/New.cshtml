@@ -1,0 +1,25 @@
+@using HairSalon.Models;
+@{
+  Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Like An Angel Hair Salon</title>
+  </head>
+  <body>
+    <h1>Add a new specialty</h1>
+
+<form action="/specialties" method="post">
+  <label for="description">Specialty description:</label>
+  <input id="description" name="description" type="text">
+  <button type="submit">Add new specialty</button>
+</form>
+
+<p><a href="/">Back home</a></p>
+<p><a href="/specialties">View all specialties</a></p>
+  </body>
+
+</html>

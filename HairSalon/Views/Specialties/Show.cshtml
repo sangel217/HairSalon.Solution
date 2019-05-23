@@ -1,0 +1,41 @@
+@using HairSalon.Models;
+@{
+  Layout = "_Layout";
+}
+
+<h1>Like An Angel Hair Salon</h1>
+<h2>Specialty: @Model["selectedSpecialty"].GetDescription()</h2>
+<hr />
+
+@if (@Model["specialtyStylists"].Count != 0)
+{
+  <h4>This specialty has these stylists:</h4>
+  <ul>
+    @foreach (Stylist stylist in @Model["specialtyStylists"])
+    {
+      <li>@stylist.GetStylistName()</li>
+    }
+  </ul>
+}
+
+<h4>Add a stylist to this specialty:</h4>
+
+<form action='/specialties/@Model["selectedSpecialty"].GetId()/stylists/new' method='post'>
+  <label for='stylistId'>Select a stylist</label>
+  <select id='stylistId' name='stylistId' type='text'>
+    @foreach (var stylist in @Model["allStylists"])
+    {
+      <option value='@stylist.GetId()'>@stylist.GetStylistName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h4>Delete this specialty:</h4>
+
+<form action="/specialties/@Model["selectedSpecialty"].GetId()/delete" method="post">
+  <button type="submit" name="button">delete Specialty</button>
+</form>
+
+
+<p><a href="/">Return to Main Page</a></p>

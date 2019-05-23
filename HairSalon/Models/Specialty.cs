@@ -212,12 +212,11 @@ namespace HairSalon.Models
       return stylists;
     }
 
-    public void AddStylist(Stylist newStylist)
+    public void AddStylists(Stylist newStylist)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      //this adds an entry to the categories_items join table containg IDs for relevant Specialty and Stylist objects
       cmd.CommandText = @"INSERT INTO stylists_specialties (stylistId, specialtyId) VALUES (@StylistId, @SpecialtyId);";
       MySqlParameter stylistId = new MySqlParameter();
       stylistId.ParameterName = "@StylistId";
