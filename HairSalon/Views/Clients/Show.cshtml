@@ -10,6 +10,7 @@
 <h2>@Model["client"].GetClientName()</h2>
 <h2>Stylist: @Model["stylist"].GetStylistName()</h2>
 
+
 <h3><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add another client</a></h3>
 <h3><a href='/stylists'>View all stylists</a></h3>
 <form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/delete" method="post">

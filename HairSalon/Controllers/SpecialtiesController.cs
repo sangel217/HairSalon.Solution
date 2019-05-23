@@ -29,7 +29,6 @@ namespace HairSalon.Controllers
       return View("Index", allSpecialties);
     }
 
-
     [HttpPost("/specialties/delete")]
     public ActionResult DeleteAll()
     {
