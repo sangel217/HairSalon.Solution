@@ -14,16 +14,16 @@
 {
   @foreach (Stylist stylist in Model)
   {
-    <li><a href='/stylists/@stylist.GetId()'>@stylist.GetStylistName()</a></li>
+    <h3><li><a href='/stylists/@stylist.GetId()'>@stylist.GetStylistName()</a></li></h3>
 
     <button class="btn btn-sm" ><a href='/stylists/@stylist.GetId()/edit'>Edit</a></button>
   }
 }
 
 </ul>
-<h3><a href='/'>Back home</a></h3>
-<h3><a href="/stylists/new">Add a new stylist.</a></h3>
-<h3><a href="/specialties/new">Add specialty</a></h3>
+<h4><a href='/'>Back home</a></h4>
+<h4><a href="/stylists/new">Add a new stylist.</a></h4>
+<h4><a href="/specialties/new">Add specialty</a></h4>
  <form action="/stylists/delete" method="post">
   <button type="submit" name="button">Delete all stylists</button>
 </form>
